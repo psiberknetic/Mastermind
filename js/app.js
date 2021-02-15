@@ -13,14 +13,23 @@ function GuessResults(guess, picas, centros) {
 }
 
 GuessResults.prototype.render = function () {
-  return `<div>Your guess (${this.guess}): ${greenDot} - ${this.centros}, ${orangeDot} - ${this.picas}</div>`;
+  return `<div>Guess ${gameData.numberOfGuesses} (${this.guess}): ${greenDot} - ${this.centros}, ${orangeDot} - ${this.picas}</div>`;
 }
 
 $(function () {
-  initializeGameData();
+  startNewGame();
+  $('#startNewGameButton').on('click', startNewGame);
 });
 
-$('#makeGuessButton').on('click', handleGuessSubmit);
+function startNewGame(){
+  initializeGameData();
+  initializeGameBoard();
+  $('#makeGuessButton').on('click', handleGuessSubmit);
+}
+
+function initializeGameBoard(){
+  $('#guessResults').html('');
+}
 
 function handleGuessSubmit() {
   gameData.currentGuess = getUserGuess();
@@ -31,6 +40,10 @@ function handleGuessSubmit() {
     $('#guessResults').append(compareResults.render());
     if (compareResults.centros == 4) {
       $('#makeGuessButton').off('click');
+      $('#winModal').modal({
+        keyboard: false,
+        focus: true
+      });
     }
   }
 }
