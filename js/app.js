@@ -24,11 +24,14 @@ $(function () {
 function startNewGame(){
   initializeGameData();
   initializeGameBoard();
+  $('#winModal').modal('hide');
   $('#makeGuessButton').on('click', handleGuessSubmit);
 }
 
 function initializeGameBoard(){
   $('#guessResults').html('');
+  $('#playerGuess').val('');
+  $('#totalGuesses').text(`Total guesses: ${gameData.numberOfGuesses}`);
 }
 
 function handleGuessSubmit() {
@@ -44,6 +47,10 @@ function handleGuessSubmit() {
         keyboard: false,
         focus: true
       });
+    }
+    else{
+      $('#playerGuess').val('');
+      $('#playerGuess').focus();
     }
   }
 }
@@ -82,7 +89,7 @@ function getUserGuess() {
 }
 
 function initializeGameData() {
-  gameData.NumberOfGuesses = 0;
+  gameData.numberOfGuesses = 0;
   gameData.numberToGuess = getNumberToGuess(4);
 }
 
