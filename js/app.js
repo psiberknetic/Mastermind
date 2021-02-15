@@ -27,14 +27,6 @@ function compareNumbers(numToGuess, playerGuess) {
   var picas = 0;
   var centros = 0;
 
-  var sum = Array.from(playerGuess).reduce(function(p, c) {
-    var prevValue = parseInt(p);
-    var currValue = parseInt(c);
-    return prevValue + currValue;
-  });
-  alert(sum);
-
-
   for (var i = 0; i < numToGuess.length; i++) {
     for (var j = 0; j < numToGuess.length; j++) {
       if (numToGuess[i] === playerGuess[j]) {
@@ -66,16 +58,25 @@ function getUserGuess() {
 
 function initializeGameData() {
   gameData.NumberOfGuesses = 0;
-  gameData.numberToGuess = getNumberToGuess();
+  gameData.numberToGuess = getNumberToGuess(4);
 }
 
-function getNumberToGuess() {
-  var number = Math.floor(Math.random() * 10000);
-  return getPaddedNumber(number);
+function getNumberToGuess(numberOfDigits) {
+  var valueAsArray = [];
+  var numbers = [0,1,2,3,4,5,6,7,8,9];
+  for(let i = 0; i < numberOfDigits; i++){
+    let index = getRandomNumberBetween(0, numbers.length);
+    valueAsArray.push(numbers[index]);
+    numbers.splice(index, 1);
+  }
+
+  var value = valueAsArray.reduce((prev, curr) =>{
+    return prev.toString() + curr;
+  });
+
+  return value;
 }
 
-function getPaddedNumber(number) {
-  const paddedNumber = '0000' + number;
-  return paddedNumber.substr(paddedNumber.length - 4);
+function getRandomNumberBetween(min, max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
