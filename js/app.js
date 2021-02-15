@@ -2,14 +2,13 @@ const greenDot = '<span class="greenDot"></span>';
 const orangeDot = '<span class="orangeDot"></span>';
 
 var gameData = {
-  "numberOfGuesses": 0,
-  "playingGame": true
+  "numberOfGuesses": 0
 }
 
 function GuessResults(guess, picas, centros) {
-  this.guess = guess;
-  this.picas = picas;
-  this.centros = centros;
+  this.guess = guess; //The number the player guessed
+  this.picas = picas; //Corrent number, incorrect placement
+  this.centros = centros; //Correct number, correct placement
 }
 
 GuessResults.prototype.render = function () {
