@@ -1,3 +1,6 @@
+const greenDot = '<span class="greenDot"></span>';
+const orangeDot = '<span class="orangeDot"></span>';
+
 var gameData = {
   "numberOfGuesses": 0,
   "playingGame": true
@@ -10,7 +13,7 @@ function GuessResults(guess, picas, centros) {
 }
 
 GuessResults.prototype.render = function () {
-  return `<div class='resultDiv'>Your guess (${this.guess}): <span class='greenDot'></span> - ${this.centros}, <span class='yellowDot'></span> - ${this.picas}</div>`;
+  return `<div>Your guess (${this.guess}): ${greenDot} - ${this.centros}, ${orangeDot} - ${this.picas}</div>`;
 }
 
 $(function () {
