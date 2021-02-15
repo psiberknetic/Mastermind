@@ -20,6 +20,12 @@ $(function () {
   $('#startNewGameButton').on('click', startNewGame);
 });
 
+$('#playerGuess').keydown(function (e) {
+  if (e.keyCode == 13) {
+    $('#makeGuessButton').click();
+  }
+});
+
 function startNewGame(){
   initializeGameData();
   initializeGameBoard();
