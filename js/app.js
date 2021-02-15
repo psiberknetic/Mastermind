@@ -1,5 +1,6 @@
 var gameData = {
-  "NumberOfGuesses": 0,
+  "numberOfGuesses": 0,
+  "playingGame": true
 }
 
 function GuessResults(guess, picas, centros) {
@@ -9,19 +10,27 @@ function GuessResults(guess, picas, centros) {
 }
 
 GuessResults.prototype.render = function () {
-  return `<div class='resultDiv'>${this.guess} - ${this.picas}P: ${this.centros}C</div>`;
+  return `<div class='resultDiv'>Your guess (${this.guess}): <span class='greenDot'></span> - ${this.centros}, <span class='yellowDot'></span> - ${this.picas}</div>`;
 }
 
 $(function () {
   initializeGameData();
 });
 
-$('#makeGuessButton').on('click', function (event) {
-  gameData.currentGuess = getUserGuess();
+$('#makeGuessButton').on('click', handleGuessSubmit);
 
-  const compareResults = compareNumbers(gameData.numberToGuess, gameData.currentGuess);
-  $('#guessResults').append(compareResults.render());
-});
+function handleGuessSubmit() {
+  gameData.currentGuess = getUserGuess();
+  if (gameData.currentGuess) {
+    $('#totalGuesses').text(`Total guesses: ${++gameData.numberOfGuesses}`);
+
+    const compareResults = compareNumbers(gameData.numberToGuess, gameData.currentGuess);
+    $('#guessResults').append(compareResults.render());
+    if (compareResults.centros == 4) {
+      $('#makeGuessButton').off('click');
+    }
+  }
+}
 
 function compareNumbers(numToGuess, playerGuess) {
   var picas = 0;
@@ -63,20 +72,25 @@ function initializeGameData() {
 
 function getNumberToGuess(numberOfDigits) {
   var valueAsArray = [];
-  var numbers = [0,1,2,3,4,5,6,7,8,9];
-  for(let i = 0; i < numberOfDigits; i++){
-    let index = getRandomNumberBetween(0, numbers.length);
+  var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for (let i = 0; i < numberOfDigits; i++) {
+    let index = getRandomNumberBetween(0, numbers.length - 1);
     valueAsArray.push(numbers[index]);
     numbers.splice(index, 1);
   }
 
-  var value = valueAsArray.reduce((prev, curr) =>{
+  var value = valueAsArray.reduce((prev, curr) => {
     return prev.toString() + curr;
   });
 
   return value;
 }
 
-function getRandomNumberBetween(min, max){
+function getPaddedNumber(number) {
+  const paddedNumber = '0000' + number;
+  return paddedNumber.substr(paddedNumber.length - 4);
+}
+
+function getRandomNumberBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

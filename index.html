@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- bootstrap -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -30,15 +31,21 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Your Guess</span>
                 </div>
-                <input id="playerGuess" type="text" class="form-control" placeholder="Your Guess" aria-label="Your Guess"
-                    aria-describedby="basic-addon1">
+                <input id="playerGuess" type="text" class="form-control" placeholder="Your Guess"
+                    aria-label="Your Guess" aria-describedby="basic-addon1">
             </div>
             <button class="btn-primary" id="makeGuessButton">Submit</button>
         </div>
     </div>
     <div class="row">
-        <div id="guessResults" class="col-sm-6 mx-auto">
+        <div class="col-sm-6 mx-auto">
+            <div class="clearfix">
+                <h3 class="float-left">Guess History</h3>
+                <span id="totalGuesses" class="float-right">Total guesses: 0</span>
+            </div>
+            <div id="guessResults">
 
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,17 @@
+.greenDot{
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  alt: 'Correct number - correct placement';
+}
+
+.yellowDot{
+  height: 10px;
+  width: 10px;
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+  alt: 'Correct number - incorrect placement';
+}
